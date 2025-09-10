@@ -1,0 +1,31 @@
+<button onClick={() => setAlarmType("alarm")} style={{ padding: 8, borderRadius: 8, border: alarmType === "alarm" ? "2px solid #16a34a" : "1px solid #e5e7eb" }}>🔔 Alarm</button>
+                    <button onClick={() => setAlarmType("siren")} style={{ padding: 8, borderRadius: 8, border: alarmType === "siren" ? "2px solid #16a34a" : "1px solid #e5e7eb" }}>🚓 Siren</button>
+                    <button onClick={() => setAlarmType("bell")} style={{ padding: 8, borderRadius: 8, border: alarmType === "bell" ? "2px solid #16a34a" : "1px solid #e5e7eb" }}>⏰ Bell</button>
+                  </div>
+                </div>
+
+                {/* message & automatic pick simulation */}
+                <div style={{ marginTop: 12 }}>
+                  {message && <div style={{ padding: 12, borderRadius: 8, background: isAlertActive ? "#fee2e2" : "#ecfdf5", color: isAlertActive ? "#991b1b" : "#065f46", fontWeight: 600 }}>{message}</div>}
+                  {isAlertActive && (
+                    <div style={{ marginTop: 12 }}>
+                      {/* Tự động tắt khi phát hiện 'nhặt rác' thực tế: ở demo ta có nút mô phỏng,
+                          trong thực tế: backend/AI sẽ gửi event "nhặt rác" tự động và gọi handlePickTrash() */}
+                      <button onClick={handlePickTrash} style={{ marginTop: 8, ...btn("#16a34a") }}>🧹 Đã nhặt rác (mô phỏng)</button>
+                    </div>
+                  )}
+                </div>
+
+                {/* audio tag */}
+                <audio ref={alarmRef} loop>
+                  <source src={`/${alarmType}.mp3`} type="audio/mpeg" />
+                  Trình duyệt không hỗ trợ phát âm thanh.
+                </audio>
+              </div>
+            )}
+          </main>
+        </div>
+      )}
+    </div>
+  );
+}
